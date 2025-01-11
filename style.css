@@ -43,6 +43,9 @@ header {
     color: #555;
 }
 
+#options {
+    margin-bottom: 40px;
+}
 
 footer {
     padding: 20px;
@@ -131,6 +134,7 @@ button {
     font-family: "Ubuntu", Sans-serif;
     font-size: 15px;
     font-weight: 500;
+    height: 45px;
     border: none;
     box-shadow: -15px 18px 20px 0px #c0a141 inset;
     color: #FFFFFF;
@@ -150,3 +154,28 @@ button#bingo a {
     color: white;
 }
 
+
+.mobile {
+    display: none;
+}
+.desktop {
+    display: block;
+}
+
+@media(max-width: 767px) {
+    #bingo-grid {
+        width: 100%;
+        margin: 10px;
+        overflow: scroll;
+        aspect-ratio: unset;
+    }
+    button {
+        padding: 12px;
+    }
+    .mobile {
+        display: block;
+    }
+    .desktop {
+        display: none;
+    }
+}

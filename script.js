@@ -109,6 +109,21 @@ document.getElementById('close-popup').addEventListener('click', () => {
     document.getElementById('popup').classList.add('hidden');
 });
 
+// Close the popup when clicking outside, excluding the "Show All Entries" button
+document.addEventListener('click', (event) => {
+    const popup = document.getElementById('popup');
+    const popupContent = document.getElementById('popup-content');
+    const showAllButton = document.getElementById('show-all');
+
+    if (popup && !popup.classList.contains('hidden')) {
+        // Check if the click is outside the popup content and not on the "Show All Entries" button
+        if (!popupContent.contains(event.target) && event.target !== showAllButton) {
+            popup.classList.add('hidden'); // Close the popup
+        }
+    }
+});
+
+
 // Add HTML2Canvas library dynamically
 const html_canvas_script = document.createElement('script');
 html_canvas_script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
@@ -185,7 +200,7 @@ document.getElementById('download-pdf').addEventListener('click', () => {
         pdf.text(footerText, pdfWidth / 2, pdfHeight + 20, { align: 'center' });
 
         // Save the PDF
-        pdf.save('bingo-card.pdf');
+        pdf.save('bingo-card-2025.pdf');
     }).catch(err => {
         console.error("Failed to generate PDF:", err);
     });
