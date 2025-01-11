@@ -98,7 +98,6 @@ function regenerateGrid() {
         });
 }
 
-// Add event listener to the "Regenerate" button
 document.getElementById('regenerate').addEventListener('click', regenerateGrid);
 
 // Popup functionality for viewing all entries
@@ -109,3 +108,51 @@ document.getElementById('show-all').addEventListener('click', () => {
 document.getElementById('close-popup').addEventListener('click', () => {
     document.getElementById('popup').classList.add('hidden');
 });
+
+// Add HTML2Canvas library dynamically
+const script = document.createElement('script');
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+document.head.appendChild(script);
+
+document.getElementById('download-image').addEventListener('click', () => {
+    const bingoGrid = document.getElementById('bingo-grid');
+    const footerText = "Made by Momoko - madebymomoko.com/2025-bingo";
+
+    html2canvas(bingoGrid).then(originalCanvas => {
+        // Set up a new canvas
+        const newCanvas = document.createElement('canvas');
+        const ctx = newCanvas.getContext('2d');
+
+        // Set dimensions for the new canvas
+        const extraHeight = 50; // Space for the footer
+        newCanvas.width = originalCanvas.width;
+        newCanvas.height = originalCanvas.height + extraHeight;
+
+        // Draw the original canvas onto the new canvas
+        ctx.drawImage(originalCanvas, 0, 0);
+
+        ctx.fillStyle = '#f4f4f4';
+        ctx.fillRect(0, originalCanvas.height, newCanvas.width, extraHeight);
+
+        // Add the footer text
+        ctx.fillStyle = '#333';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(footerText, newCanvas.width / 2, originalCanvas.height + 30); // Centered in footer
+
+        // Convert the canvas to a downloadable image
+        const imgData = newCanvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = 'bingo-card-2025.png';
+        link.href = imgData;
+        link.click();
+
+        // Clean up the temporary canvas
+        document.body.removeChild(newCanvas);
+    }).catch(err => {
+        console.error("Failed to capture image:", err);
+    });
+});
+
+
+
