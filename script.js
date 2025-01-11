@@ -110,9 +110,10 @@ document.getElementById('close-popup').addEventListener('click', () => {
 });
 
 // Add HTML2Canvas library dynamically
-const script = document.createElement('script');
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-document.head.appendChild(script);
+const html_canvas_script = document.createElement('script');
+html_canvas_script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+
+document.head.appendChild(html_canvas_script);
 
 document.getElementById('download-image').addEventListener('click', () => {
     const bingoGrid = document.getElementById('bingo-grid');
@@ -155,4 +156,38 @@ document.getElementById('download-image').addEventListener('click', () => {
 });
 
 
+// PDF Download
+const jspdf_script = document.createElement('script');
+jspdf_script.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js";
+document.head.appendChild(jspdf_script);
+
+document.getElementById('download-pdf').addEventListener('click', () => {
+    const bingoGrid = document.getElementById('bingo-grid');
+    const footerText = "Made by Momoko - madebymomoko.com/2025-bingo";
+
+    html2canvas(bingoGrid).then(canvas => {
+        // Get the canvas as an image
+        const imgData = canvas.toDataURL('image/png');
+
+        // Create a jsPDF instance
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'px', 'a4'); // Portrait, pixels, A4 size
+
+        // Calculate scaling to fit the grid in the PDF
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Maintain aspect ratio
+
+        // Add the image to the PDF
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+        // Add the footer text
+        pdf.setFontSize(12);
+        pdf.text(footerText, pdfWidth / 2, pdfHeight + 20, { align: 'center' });
+
+        // Save the PDF
+        pdf.save('bingo-card.pdf');
+    }).catch(err => {
+        console.error("Failed to generate PDF:", err);
+    });
+});
 
