@@ -89,6 +89,10 @@ footer {
     cursor: pointer;
 }
 
+#popup-content h2, #submission {
+    text-align: center;
+}
+
 h2 {
     margin: 0;
 }
