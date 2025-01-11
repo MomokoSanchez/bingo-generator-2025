@@ -10,6 +10,7 @@
     <header>
         <h1>2025 Bingo Generator</h1>
         <button id="show-all">View All Entries</button>
+        <button id="regenerate">Regenerate</button>
     </header>
     <main>
         <div id="bingo-grid"></div>
@@ -21,11 +22,13 @@
 
     <div id="popup" class="hidden">
         <div id="popup-content">
-            <button id="close-popup">Close</button>
             <h2>All Bingo Entries</h2>
-            <ul id="entry-list"></ul>
+            <div id="entry-container">
+                <ul id="entry-list"></ul>
+            </div>
+            <button id="close-popup">Close</button>
         </div>
-    </div>
+    </div>    
 
     <script src="script.js"></script>
 </body>
