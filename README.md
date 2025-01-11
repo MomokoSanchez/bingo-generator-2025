@@ -17,4 +17,4 @@ A fun, dynamic bingo grid generator that pulls random items from a predefined li
 3. Customize the entries by editing `bingo-entries.json`.
 
 ## Credits
-Made by Momoko, with baby-led sleep deprivation and ChatGPT.  
+[Made by Momoko](https://www.madebymomoko.com/), with baby-led sleep deprivation and [ChatGPT](https://chatgpt.com/share/6781bd51-f06c-8008-bdc0-89c955f7ce3f).  
