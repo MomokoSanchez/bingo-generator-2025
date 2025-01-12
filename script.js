@@ -41,7 +41,7 @@ function generateNewGrid(entries) {
 
     // Insert the "FREE SPACE" at the center
     return [...selectedEntries.slice(0, 12), 
-            "FREE SPACE – Something that felt too absurd to be true", 
+            "FREE SPACE – Something too absurd to be true", 
             ...selectedEntries.slice(12)];
 }
 

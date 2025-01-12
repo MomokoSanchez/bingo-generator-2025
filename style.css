@@ -97,6 +97,10 @@ h2 {
     margin: 0;
 }
 
+h1, h2 {
+    font-family: serif;
+}
+
 #entry-container {
     max-height: 60vh; /* Limit height of the scrollable area */
     overflow-y: auto; /* Enable vertical scrolling */
